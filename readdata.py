@@ -2,7 +2,7 @@ from os import listdir, path
 from time import sleep
 from clearscreen import clean_shell, clear_clipboard
 from pyperclip import copy as clipcopier
-from threading import Thread
+import subprocess
 #path = "E:\\Productivity\\Documents\\sdrowssap\\Rinaldo"
 def Reader(password, directory):
     clean_shell()
@@ -69,8 +69,10 @@ def Reader(password, directory):
                 print(decoded)
                 decoded = password_obtained
             clipcopier(decoded)
-            clipclear_thread = Thread(target=clear_clipboard)
-            clipclear_thread.start()
+            # clipclear_thread = Thread(target=clear_clipboard)
+            # clipclear_thread.start()
+            DETACHED_PROCESS = 0x00000008
+            subprocess.Popen(["CleanClipboard.exe", "arg"], close_fds=True, creationflags=DETACHED_PROCESS)
             print(f"The {state_text} is copied into the clipboard use it within 45 Seconds !!!")
         print("\nThe screen will be cleared within 30 Seconds!!!")
         sleep(30)
